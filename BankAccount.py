@@ -35,5 +35,25 @@ class BankAccount:
     def setBalance(self, balance):
         self.__balance = balance
 
+    #Withdraw (error handling for insufficient funds)    
+    def withdraw(self, amount):
+        if amount > self.__balance:
+            print("Insufficient funds!")
+        else:
+            self.setBalance(self.getBalance() - amount)
+        
+    #Depositiing money
+    def deposit(self, amount):
+        self.setBalance(self.getBalance() + amount)
+            
+    #Withdrawing money
+    def checkBalance(self):
+        print("Balance for this account is: $" + str(self.getBalance()))
+
 example = BankAccount("John", "Smith")
 print(example.getAccountNumber())
+example.checkBalance()
+example.deposit(100)
+example.checkBalance()
+example.withdraw(50)
+example.checkBalance()
