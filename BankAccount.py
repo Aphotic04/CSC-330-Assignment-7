@@ -1,6 +1,9 @@
+#I certify, that this computer program submitted by me is of my own work. Signed:
 #Ty Steinbach, Natasha Czaplewski, Elisha Bjerkeset
+#04/16/2025
 #CSC 330
 #Assignment 7
+#BankAccount Class
 import random
 
 class BankAccount:
