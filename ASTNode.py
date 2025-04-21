@@ -6,14 +6,19 @@
 #Create a class for ASTNode
 
 class ASTNode:
-    def __init__(self, Token, left = None, right = None):
-        self.Token = Token
-        self.left = left
-        self.right = right
+    def __init__(self):
+        self.expressions = []
 
     def __repr__(self):
-        return f"{self.Token}"
+        return f"{self.expressions}"
 
+class Expression:
+    def __init__(self, expression):
+        self.expression = expression
+
+    def __repr__(self):
+        return f"{self.expression}"
+        
 class Check:
     def __init__(self, accountNumber):
         self.accountNumber = accountNumber
@@ -45,11 +50,6 @@ class Withdraw:
     def __repr__(self):
         return f"Withdraw {self.amount} from {self.accountNumber}"
 
-'''newCheckNode = ASTNode(Check("TS112233"))
-newCreateNode = ASTNode(Create("Ty", "Steinbach"))
-newDepositNode = ASTNode(Deposit(1122, "TS112233"))
-newWithdrawNode = ASTNode(Withdraw(1122, "TS112233"))
+newCheckNode = ASTNode()
+newCheckNode.expressions.append(Expression(Check("TS112233")))
 print(newCheckNode)
-print(newCreateNode)
-print(newDepositNode)
-print(newWithdrawNode)'''
