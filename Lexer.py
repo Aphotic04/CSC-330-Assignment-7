@@ -16,7 +16,7 @@ class Lexer:
                 amount = float(re.search("[0-9]+[.][0-9]+", line).group())
                 account = re.search("([a-zA-Z]{2}[0-9]{6})$", line).group()
                 
-                amountToken = Token.Token(Token.TokenType.Number, amount)
+                amountToken = Token.Token(Token.TokenType.NUMBER, amount)
                 #amountToken.setType(Token.TokenType.Number)
                 #amountToken.setValue(amount)
 
@@ -73,7 +73,7 @@ class Lexer:
             else:
                 print("What the heck happened?!")
         return tokens
-Lexer.getTokens({"Deposit 14.14 to TS223344"})
+'''Lexer.getTokens({"Deposit 14.14 to TS223344"})
 Lexer.getTokens({"Withdraw 50.14 from TS223344"})
 Lexer.getTokens({"Check Balance TS223344"})
-Lexer.getTokens({"Create John Doe"})
+Lexer.getTokens({"Create John Doe"})'''
