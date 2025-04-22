@@ -14,43 +14,27 @@ class Parser:
     #    self.tokens = tokens
 
     def parse(tokens):
-        #for x in range(tokens.length):
-        print(tokens[0].TokenType)
-        match tokens[0].TokenType:
-            case TokenType.CREATE:
-                print("1")
-                return ASTNode.ASTNode(tokens[1], ASTNode.ASTNode(tokens[0]), ASTNode.ASTNode(tokens[2]))
-            case TokenType.CHECK:
-                print("2")
-                return ASTNode.ASTNode(tokens[1], ASTNode.ASTNode(tokens[0]))
-            case TokenType.DEPOSIT:
-                print("3")
-                return ASTNode.ASTNode(tokens[1], ASTNode.ASTNode(tokens[0]), ASTNode.ASTNode(tokens[2]))
-            case TokenType.WITHDRAW:
-                print("4")
-                return ASTNode.ASTNode(tokens[1], ASTNode.ASTNode(tokens[0]), ASTNode.ASTNode(tokens[2]))
+        root = ASTNode.ASTNode()
+        for x in range(len(tokens)):
+            #print(tokens[x].TokenType)
+            match tokens[x].TokenType:
+                case TokenType.CREATE:
+                    root.expressions.append(ASTNode.Create(tokens[x + 1].value, tokens[x + 2].value))
+                    #ASTNode.ASTNode(self.tokens[1], ASTNode.ASTNode(self.tokens[0]), ASTNode.ASTNode(self.tokens[2]))
+                case TokenType.CHECK:
+                    root.expressions.append(ASTNode.Check(tokens[x + 1].value))
+                    #return ASTNode.ASTNode(self.tokens[1], ASTNode.ASTNode(self.tokens[0]))
+                case TokenType.DEPOSIT:
+                    root.expressions.append(ASTNode.Deposit(tokens[x + 1].value, tokens[x + 2].value))
+                    #return ASTNode.ASTNode(self.tokens[1], ASTNode.ASTNode(self.tokens[0]), ASTNode.ASTNode(self.tokens[2]))
+                case TokenType.WITHDRAW:
+                    root.expressions.append(ASTNode.Withdraw(tokens[x + 1].value, tokens[x + 2].value))
+                    #return ASTNode.ASTNode(self.tokens[1], ASTNode.ASTNode(self.tokens[0]), ASTNode.ASTNode(self.tokens[2]))
+                
+        return root
             
-tokens1 = Lexer.Lexer.getTokens({"Deposit 14.14 to TS223344"})
-tokens2 = Lexer.Lexer.getTokens({"Withdraw 50.14 from TS223344"})
-tokens3 = Lexer.Lexer.getTokens({"Check Balance TS223344"})
-tokens4 = Lexer.Lexer.getTokens({"Create John Doe"})
+tokens = Lexer.Lexer.getTokens({"Deposit 14.14 to TS223344", "Withdraw 50.14 from TS223344", "Check Balance TS223344", "Create John Doe"})
 
-root1 = Parser.parse(tokens1)
-print(root1)
-print(root1.left)
-print(root1.right)
 
-root2 = Parser.parse(tokens2)
-print(root2)
-print(root2.left)
-print(root2.right)
-
-root3 = Parser.parse(tokens3)
-print(root3)
-print(root3.left)
-print(root3.right)
-
-root4 = Parser.parse(tokens4)
-print(root4)
-print(root4.left)
-print(root4.right)
+root = Parser.parse(tokens)
+print(root)
