@@ -5,3 +5,7 @@ https://docs.python.org/3/library/enum.html
 https://www.geeksforgeeks.org/enum-in-python/
 https://www.youtube.com/playlist?list=PLZQftyCk7_SdoVexSmwy_tBgs7P0b97yD
 https://www.geeksforgeeks.org/python-match-case-statement/
+https://stackoverflow.com/questions/16819222/how-do-i-return-dictionary-keys-as-a-list-in-python
+https://www.w3schools.com/python/ref_dictionary_keys.asp
+https://www.w3schools.com/python/python_try_except.asp
+https://stackoverflow.com/questions/395735/how-to-check-whether-a-variable-is-a-class-or-not
