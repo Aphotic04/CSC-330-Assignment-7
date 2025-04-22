@@ -17,6 +17,9 @@ class BankAccount:
             self.__accountNumber += str(random.randint(0, 9))
         self.__balance = 0
 
+    def __repr__(self):
+        return f"{self.__firstName} {self.__lastName}\n{self.__accountNumber}\nBalance: {self.__balance}"
+
     #Getters and Setters
     def getFirstName(self):
         return self.__firstName
@@ -39,24 +42,21 @@ class BankAccount:
         self.__balance = balance
 
     #Withdraw (error handling for insufficient funds)    
-    def withdraw(self, amount):
-        if amount > self.__balance:
-            print("Insufficient funds!")
-        else:
-            self.setBalance(self.getBalance() - amount)
+    def withdraw(self, accountNum, amount):
+        if (accountNum == self.__accountNumber):
+            if amount > self.__balance:
+                print("Insufficient funds!")
+            else:
+                self.setBalance(self.getBalance() - amount)
+                print(f"New Balance: {self.__balance}")
         
     #Depositiing money
-    def deposit(self, amount):
-        self.setBalance(self.getBalance() + amount)
+    def deposit(self, accountNum, amount):
+        if (accountNum == self.__accountNumber):
+            self.setBalance(self.getBalance() + amount)
+            print(f"New Balance: {self.__balance}")
             
     #Withdrawing money
-    def checkBalance(self):
-        print("Balance for this account is: $" + str(self.getBalance()))
-
-example = BankAccount("John", "Smith")
-print(example.getAccountNumber())
-example.checkBalance()
-example.deposit(100)
-example.checkBalance()
-example.withdraw(50)
-example.checkBalance()
+    def checkBalance(self, accountNum):
+        if (accountNum == self.__accountNumber):
+            print("Balance for this account is: $" + str(self.getBalance()))
