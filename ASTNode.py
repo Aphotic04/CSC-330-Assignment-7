@@ -12,13 +12,6 @@ class ASTNode:
     def __repr__(self):
         return f"{self.expressions}"
 
-class Expression:
-    def __init__(self, expression):
-        self.expression = expression
-
-    def __repr__(self):
-        return f"{self.expression}"
-        
 class Check:
     def __init__(self, accountNumber):
         self.accountNumber = accountNumber
