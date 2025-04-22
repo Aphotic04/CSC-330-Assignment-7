@@ -43,6 +43,6 @@ class Withdraw:
     def __repr__(self):
         return f"Withdraw {self.amount} from {self.accountNumber}"
 
-newCheckNode = ASTNode()
-newCheckNode.expressions.append(Expression(Check("TS112233")))
-print(newCheckNode)
+#newCheckNode = ASTNode()
+#newCheckNode.expressions.append(Expression(Check("TS112233")))
+#print(newCheckNode)

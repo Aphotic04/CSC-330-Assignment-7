@@ -40,7 +40,7 @@ class Lexer:
                     tokens.append(actionToken)
                     tokens.append(amountToken)
                     tokens.append(accountToken)
-                    print(tokens)
+                    #print(tokens)
                     
                     print("Withdrawal or deposit")
                 else:
@@ -55,7 +55,7 @@ class Lexer:
 
                 tokens.append(actionToken)
                 tokens.append(accountToken)
-                print(tokens)
+                #print(tokens)
             #Create name
             elif re.search("Create [a-zA-Z]+ [a-zA-Z]+$", line):
                 #Extract names to assist in accountID creation
@@ -69,7 +69,7 @@ class Lexer:
                 tokens.append(actionToken)
                 tokens.append(firstNameToken)
                 tokens.append(lastNameToken)
-                print(tokens)
+                #print(tokens)
             else:
                 print("What the heck happened?!")
         return tokens

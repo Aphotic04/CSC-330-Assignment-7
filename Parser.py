@@ -36,5 +36,5 @@ class Parser:
 tokens = Lexer.Lexer.getTokens({"Deposit 14.14 to TS223344", "Withdraw 50.14 from TS223344", "Check Balance TS223344", "Create John Doe"})
 
 
-root = Parser.parse(tokens)
-print(root)
+#root = Parser.parse(tokens)
+#print(root)

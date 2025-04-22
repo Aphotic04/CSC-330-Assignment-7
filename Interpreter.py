@@ -39,7 +39,7 @@ class Interpreter:
                 except:
                     print("Withdraw Failed: Couldn't Find Account")
 
-tokens = Lexer.Lexer.getTokens(["Create John Doe"])
+'''tokens = Lexer.Lexer.getTokens(["Create John Doe"])
 
 root = Parser.Parser.parse(tokens)
 interpreter = Interpreter()
@@ -48,5 +48,5 @@ account = list(interpreter.bank.keys())[0]
 
 tokens = Lexer.Lexer.getTokens([f"Deposit 14.14 to {account}", f"Withdraw 3.14 from {account}", f"Check Balance {account}"])
 root = Parser.Parser.parse(tokens)
-interpreter.interpret(root)
+interpreter.interpret(root)'''
 
