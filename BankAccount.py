@@ -50,13 +50,13 @@ class BankAccount:
                 self.setBalance(self.getBalance() - amount)
                 print(f"New Balance: {self.__balance}")
         
-    #Depositiing money
+    #Depositing money
     def deposit(self, accountNum, amount):
         if (accountNum == self.__accountNumber):
             self.setBalance(self.getBalance() + amount)
             print(f"New Balance: {self.__balance}")
             
-    #Withdrawing money
+    #Checking balance
     def checkBalance(self, accountNum):
         if (accountNum == self.__accountNumber):
             print("Balance for this account is: $" + str(self.getBalance()))
