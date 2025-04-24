@@ -1,88 +1,120 @@
 #I certify, that this computer program submitted by me is of my own work. Signed:
 #Ty Steinbach, Natasha Czaplewski, Elisha Bjerkeset
-#04/22/2025
+#04/24/2025
 #CSC 330
 #Assignment 7
 
 import BankAccount
 import Lexer
 import Parser
-from Interpreter import Interpreter
+import Interpreter
+import unittest
 
-def initialize(bank):
-    # Open the file in read mode
+###################################
+#####       initialize        #####
+###################################
+#Loads new accounts into bank
+def initialize(interpreter):
+    #Open the file in read mode
     file = open("accounts.txt", "r")
+    commands = []
+    
+    #Places lines in array
     for line in file:
         if line.strip():
-            acc_id, balance = line.strip().split()
-            acc = BankAccount.BankAccount("First", "Last")
-            acc.setAccountNumber(acc_id)
-            acc.setBalance(float(balance))
-            bank[acc_id] = acc
+            commands.append(line.strip())
+
+    #Compiles data
+    tokens = Lexer.Lexer.getTokens(commands)
+    AST = Parser.Parser.parse(tokens)
+    interpreter.interpret(AST)
     file.close()
 
+###################################
+#####           main          #####
+###################################
 def main():
-    interpreter = Interpreter()
-    initialize(interpreter.bank)
+    #New interpreter and call initialize
+    interpreter = Interpreter.Interpreter()
+    initialize(interpreter)
     
-    #Print available accounts for testing purposes
-    while True: 
-        print("Available accounts:")
-        for acc in interpreter.bank:
-            print(f" - {acc}")
+    #Print available accounts
+    print("Available accounts:")
+    for acc in interpreter.bank:
+        print(f" - {acc}")
+
+    #Print Instructions
+    print("To leave, type 'Exit'\n")
+    print("To run specification testing, type 'Test'\n")
+    print("Command syntax:\nCreate firstName lastName\nCheck Balance accountNumber\nWithraw decimalNumber from accountNumber\nDeposit decimalNumber to accountNumber")
+    print("\n\n")
+
+    #Input loop
+    stay = True
+    while stay:
+        commands = []
+        userInput = input("Command: ")
         
+        if userInput == "Exit": #Exit
+            stay = False
+        elif userInput == "Test": #Run Tests
+            specification_tests()
+        else: #Compile
+            commands.append(userInput)
+            try:
+                tokens = Lexer.Lexer.getTokens(commands)
+                AST = Parser.Parser.parse(tokens)
+                interpreter.interpret(AST)
+            except:
+                print("Incorrect Syntax")
 
-        accountID = input("Which account would you like to view/adjust? ").strip()
-        #Error handling if account does not exist
-        if accountID not in interpreter.bank:
-            print("Account not found.")
-            continue
-           
-        while True:
-            print("\nSelect from the following options.")
-            print("1. Make a deposit.")
-            print("2. Make a withdrawal.")
-            print("3. Check the balance.")
-            print("4. Check another account.")
-            print("5. Create a new account.")
-            print("6. Run specification tests.")
-            print("Exit")
-            user_input = input("Selection: ").strip()
-            
-            #Deposit
-            if user_input == "1":
-                amount = float(input("Enter deposit amount: $"))
-                interpreter.bank[accountID].deposit(accountID, amount)
-                
-            #Withdrawal
-            elif user_input == "2":
-                amount = float(input("Enter withdrawal amount: $"))
-                interpreter.bank[accountID].withdraw(accountID, amount)
-                
-            #Check Balance
-            elif user_input == "3":
-                interpreter.bank[accountID].checkBalance(accountID)
-                
-            #Check another account
-            elif user_input == "4":
-                break
-                
-            #Create account
-            elif user_input == "5":
-                first = input("Enter first name: ")
-                last = input("Enter last name: ")
-                tokens = Lexer.Lexer.getTokens([f"Create {first} {last}"])
-                root = Parser.Parser.parse(tokens)
-                interpreter.interpret(root)
-                print("Account created.")
+###################################
+#####    specification_tests  #####
+###################################
+#Runs tests
+def specification_tests():
+    testing(test = "test_create", account = BankAccount.BankAccount("John", "Doe"))
+    testing(test = "test_deposit", previous = 100, current = 150, amount = 50)
+    testing(test = "test_withdraw", previous = 100, current = 50, amount = 50)
 
-            #Run spec tests
-            elif user_input == "6":
-                print("Running specification tests:")
-            
-            elif user_input.lower() == "exit":
-                print("Thank you for banking with us!")
-                return
+###################################
+#####         testing         #####
+###################################
+    #Unit testing
+def testing(test, account = None, previous = None, current = None, amount = None):
+    class Test(unittest.TestCase):
+        #Getting variables
+        def setUp(self):
+            self.account = account
+            self.previous = previous
+            self.current = current
+            self.amount = amount
 
+        def test_create(self):
+            #Asserting if the account number matched the expected regex
+            first = self.account.getFirstName()[0]
+            last = self.account.getLastName()[0]
+            pattern = rf"^{first}{last}\d{{6}}$"
+            self.assertRegex(self.account.getAccountNumber(), pattern)
+
+        def test_deposit(self):
+            #Testing the balance
+            self.assertEqual(self.current, self.previous + self.amount)
+
+        def test_withdraw(self):
+            #Testing the balance
+            self.assertEqual(self.current, self.previous - self.amount)
+
+    #Loading the tests in the class and a runner for those tests
+    suite = unittest.TestSuite()
+
+    #Adding the specified test to run
+    if test:
+        suite.addTest(Test(test))
+
+    #Running Test
+    unittest.TextTestRunner().run(suite)   
+
+#Calling main
 if __name__ == "__main__":
     main()
