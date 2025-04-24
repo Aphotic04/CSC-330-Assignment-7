@@ -71,4 +71,5 @@ class Lexer:
                 tokens.append(lastNameToken)
             else:
                 print("Lexer Error: Incorrect Syntax")
+        print(tokens)
         return tokens

@@ -84,10 +84,13 @@ def main():
                                 userInput = input("Enter the amount to deposit. Example: '10', '15.55': ")
 
                                 #Ensures input is digit and compiles input
-                                if userInput.isdigit():
+                                if isfloat(userInput):
                                     inputString = f"Deposit {userInput} to {accountID}"
                                     inputArray = [inputString]
+                                    previous_balance = interpreter.bank[accountID].getBalance()
                                     runCommands(inputArray, interpreter)
+                                    current_balance = interpreter.bank[accountID].getBalance()
+                                    testing(test = "test_deposit", previous = previous_balance, current = current_balance, amount = float(userInput))
                                 else:
                                     print("Invalid Entry")
                             case "2": #Make withdrawl based on input
@@ -95,10 +98,13 @@ def main():
                                 userInput = input("Enter the amount to withdraw. Example: '10', '15.55': ")
 
                                 #Ensures input is digit and compiles input
-                                if userInput.isdigit():
+                                if isfloat(userInput):
                                     inputString = f"Withdraw {userInput} from {accountID}"
                                     inputArray = [inputString]
+                                    previous_balance = interpreter.bank[accountID].getBalance()
                                     runCommands(inputArray, interpreter)
+                                    current_balance = interpreter.bank[accountID].getBalance()
+                                    testing(test = "test_withdraw", previous = previous_balance, current = current_balance, amount = float(userInput))
                                 else:
                                     print("Invalid Entry")
                             case "3": #Check balance of account
@@ -167,8 +173,8 @@ def runCommands(commands, interpreter):
 #Runs tests
 def specification_tests():
     testing(test = "test_create", account = BankAccount.BankAccount("John", "Doe"))
-    testing(test = "test_deposit", previous = 100, current = 150, amount = 50)
-    testing(test = "test_withdraw", previous = 100, current = 50, amount = 50)
+    testing(test = "test_deposit", previous = 100.00, current = 150.00, amount = 50.00)
+    testing(test = "test_withdraw", previous = 100.00, current = 50.00, amount = 50.00 )
 
 ###################################
 #####         testing         #####
@@ -192,10 +198,14 @@ def testing(test, account = None, previous = None, current = None, amount = None
 
         def test_deposit(self):
             #Testing the balance
+            print("Expected value after deposit: " + str(self.previous + self.amount))
+            print("Actual value after deposit: " + str(self.current))
             self.assertEqual(self.current, self.previous + self.amount)
 
         def test_withdraw(self):
             #Testing the balance
+            print("Expected value after deposit: " + str(self.previous - self.amount))
+            print("Actual value after deposit: " + str(self.current))
             self.assertEqual(self.current, self.previous - self.amount)
 
     #Loading the tests in the class and a runner for those tests
@@ -208,6 +218,17 @@ def testing(test, account = None, previous = None, current = None, amount = None
     #Running Test
     unittest.TextTestRunner().run(suite)   
 
+###################################
+#####      Float Checking     #####
+###################################
+#Float checker
+def isfloat(s):
+    try:
+        float(s)
+        return True
+    except:
+        return False
+    
 #Calling main
 if __name__ == "__main__":
     main()

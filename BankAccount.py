@@ -13,9 +13,9 @@ class BankAccount:
 
     #Constructor
     def __init__(self, firstName, lastName):
-        self.__firstName = firstName
-        self.__lastName = lastName
-        self.__accountNumber = firstName[0] + lastName[0]
+        self.__firstName = firstName.upper()
+        self.__lastName = lastName.upper()
+        self.__accountNumber = firstName[0].upper() + lastName[0].upper()
         for x in range(6):
             self.__accountNumber += str(random.randint(0, 9))
         self.__balance = 0

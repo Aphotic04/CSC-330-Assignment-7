@@ -28,4 +28,5 @@ class Parser:
                     root.expressions.append(ASTNode.Deposit(tokens[x + 1].value, tokens[x + 2].value))
                 case TokenType.WITHDRAW:
                     root.expressions.append(ASTNode.Withdraw(tokens[x + 1].value, tokens[x + 2].value))
+        print(root)
         return root

@@ -8,6 +8,7 @@ import ASTNode
 import Lexer
 import Parser
 import BankAccount
+from banking import testing
 
 ###################################
 #####       Interpreter       #####
@@ -27,6 +28,9 @@ class Interpreter:
                 account = BankAccount.BankAccount(currExpr.firstName, currExpr.lastName)
                 returnNum = account.getAccountNumber()
                 self.bank[returnNum] = account
+                
+                #Testing account creation
+                testing(test = "test_create", account = self.bank[returnNum])
             #If Check, check account
             if (isinstance(currExpr, ASTNode.Check)):
                 try:
