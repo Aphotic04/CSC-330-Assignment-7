@@ -29,8 +29,6 @@ class Interpreter:
                 returnNum = account.getAccountNumber()
                 self.bank[returnNum] = account
                 
-                #Testing account creation
-                testing(test = "test_create", account = self.bank[returnNum])
             #If Check, check account
             if (isinstance(currExpr, ASTNode.Check)):
                 try:
