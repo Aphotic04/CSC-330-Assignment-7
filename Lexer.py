@@ -16,9 +16,9 @@ class Lexer:
         tokens = []
         for line in linesCode:
             #If string matches a deposit or withdraw
-            if re.search("^((Withdraw|Deposit) [0-9]+[.][0-9]+ (to|from) [a-zA-Z]{2}[0-9]{6})$", line):
+            if re.search("^((Withdraw|Deposit) [0-9]+([.][0-9]+)? (to|from) [a-zA-Z]{2}[0-9]{6})$", line):
                 #Get amount/account info
-                amount = float(re.search("[0-9]+[.][0-9]+", line).group())
+                amount = float(re.search("[0-9]+([.][0-9]+)?", line).group())
                 account = re.search("([a-zA-Z]{2}[0-9]{6})$", line).group()
                 #Create tokens from amount/account
                 amountToken = Token.Token(Token.TokenType.NUMBER, amount)
