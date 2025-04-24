@@ -20,6 +20,7 @@ class BankAccount:
             self.__accountNumber += str(random.randint(0, 9))
         self.__balance = 0
 
+    #Print as
     def __repr__(self):
         return f"{self.__firstName} {self.__lastName}\n{self.__accountNumber}\nBalance: {self.__balance}"
 
