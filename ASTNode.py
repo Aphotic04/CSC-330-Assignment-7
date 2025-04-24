@@ -5,6 +5,10 @@
 #Assignment 7
 #Create a class for ASTNode
 
+###################################
+#####          ASTNode        #####
+###################################
+#Root node for ast
 class ASTNode:
     def __init__(self):
         self.expressions = []
@@ -12,6 +16,9 @@ class ASTNode:
     def __repr__(self):
         return f"{self.expressions}"
 
+###################################
+#####          Check          #####
+###################################
 class Check:
     def __init__(self, accountNumber):
         self.accountNumber = accountNumber
@@ -19,6 +26,9 @@ class Check:
     def __repr__(self):
         return f"Check Balance {self.accountNumber}"
 
+###################################
+#####          Create         #####
+###################################
 class Create:
     def __init__(self, firstName, lastName):
         self.firstName = firstName
@@ -27,6 +37,9 @@ class Create:
     def __repr__(self):
         return f"Create {self.firstName} {self.lastName}"
 
+###################################
+#####         Deposit         #####
+###################################
 class Deposit:
     def __init__(self, amount, accountNumber):
         self.amount = amount
@@ -35,6 +48,9 @@ class Deposit:
     def __repr__(self):
         return f"Deposit {self.amount} to {self.accountNumber}"
 
+###################################
+#####         Withdraw        #####
+###################################
 class Withdraw:
     def __init__(self, amount, accountNumber):
         self.amount = amount
@@ -42,7 +58,3 @@ class Withdraw:
 
     def __repr__(self):
         return f"Withdraw {self.amount} from {self.accountNumber}"
-
-#newCheckNode = ASTNode()
-#newCheckNode.expressions.append(Expression(Check("TS112233")))
-#print(newCheckNode)
