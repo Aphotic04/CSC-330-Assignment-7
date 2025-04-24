@@ -7,19 +7,23 @@
 
 from enum import Enum
 
+###################################
+#####          Token          #####
+###################################
 class Token:
+    #Constructor
     def __init__(self, TokenType, value = None):
         self.TokenType = TokenType
         self.value = value
 
-    #def __repr__(self):
-    #    if self.value: return f"{self.TokenType}:{self.value}"
-    #    return f"{self.TokenType}"
-
-    def __str__(self):
+    #Representation
+    def __repr__(self):
         if self.value: return f"{self.TokenType}:{self.value}"
         return f"{self.TokenType}"
 
+###################################
+#####       TokenType         #####
+###################################
 class TokenType(Enum):
     NUMBER = "FLOAT"
     CREATE = "CREATE"
