@@ -80,7 +80,7 @@ def specification_tests():
 ###################################
 #####         testing         #####
 ###################################
-    #Unit testing
+#Unit testing
 def testing(test, account = None, previous = None, current = None, amount = None):
     class Test(unittest.TestCase):
         #Getting variables
