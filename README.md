@@ -10,3 +10,4 @@ https://www.w3schools.com/python/ref_dictionary_keys.asp
 https://www.w3schools.com/python/python_try_except.asp
 https://stackoverflow.com/questions/395735/how-to-check-whether-a-variable-is-a-class-or-not
 https://docs.python.org/3/library/unittest.html
+https://www.geeksforgeeks.org/how-to-read-from-a-file-in-python/
